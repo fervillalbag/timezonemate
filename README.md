@@ -111,11 +111,3 @@ const currentDay = formatWithUserTimeZone(
 ```
 
 Feel free to explore and customize the application based on your needs!
-
-```
-
-```
-
-```
-
-```
