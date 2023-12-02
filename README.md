@@ -1,30 +1,121 @@
-# React + TypeScript + Vite
+# TimezoneMate
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+TimezoneMate is a React application that helps you manage time zones effortlessly. It detects the user's time zone and allows you to format dates accordingly using the Dayjs library.
 
-Currently, two official plugins are available:
+## Table of Contents
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- [Installation](#installation)
+- [Usage](#usage)
+- [Components](#components)
+- [Customization](#customization)
 
-## Expanding the ESLint configuration
+## Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+1. Clone the repository:
 
-- Configure the top-level `parserOptions` property like this:
+```bash
+git clone https://github.com/tu-usuario/tu-proyecto.git
+```
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
+2. Navigate to the project directory:
+
+```bash
+cd tu-proyecto
+```
+
+3. Install dependencies:
+
+```bash
+npm install
+```
+
+## Usage
+
+1. Import the `useTimeZone` hook in your component:
+
+```jsx
+import useTimeZone from "./hooks/useTimezone";
+```
+
+2. Use the `useTimeZone` hook in your component:
+
+```jsx
+function App() {
+  const { isLoading, formatWithUserTimeZone } = useTimeZone();
+
+  const currentDay = formatWithUserTimeZone(
+    false,
+    new Date(),
+    "YYYY-MM-DD"
+  )?.toString();
+
+  return (
+    <div className="p-5">
+      <h1 className="text-lg font-semibold">Timezonemate!</h1>
+      <span>{isLoading ? "Loading.." : currentDay}</span>
+    </div>
+  );
+}
+
+export default App;
+```
+
+3. Run the application:
+
+```bash
+npm run dev
+```
+
+4. Open your browser and navigate to [http://localhost:3000](http://localhost:3000).
+
+## Components
+
+### TimeZoneProvider
+
+The `TimeZoneProvider` component is a context provider that initializes the time zone information using the `useTimezone` hook.
+
+```jsx
+import { TimeZoneProvider } from "./hooks/TimeZoneContext";
+
+function App() {
+  return (
+    <TimeZoneProvider>{/* Your components here */}</TimeZoneProvider>
+  );
 }
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+### useTimezone Hook
+
+The `useTimezone` hook provides information about the user's time zone and a function to format dates.
+
+```jsx
+import useTimeZone from "./hooks/useTimezone";
+
+function YourComponent() {
+  const { isLoading, formatWithUserTimeZone } = useTimeZone();
+
+  // Your component logic here
+}
+```
+
+## Customization
+
+The application uses Dayjs for date formatting. You can customize the date format in the `formatWithUserTimeZone` function.
+
+```jsx
+const currentDay = formatWithUserTimeZone(
+  false,
+  new Date(),
+  "YYYY-MM-DD"
+)?.toString();
+```
+
+Feel free to explore and customize the application based on your needs!
+
+```
+
+```
+
+```
+
+```
